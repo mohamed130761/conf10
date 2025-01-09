@@ -30,7 +30,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['.vercel.app','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app','.netlify.app','localhost','127.0.0.1']
 
 
 # Application definition
@@ -59,6 +59,9 @@ MIDDLEWARE = [
 
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    'https://your-netlify-domain.netlify.app',
+]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'website.urls'
