@@ -141,3 +141,4 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR,'website/static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CSRF_TRUSTED_ORIGINS = ['https://conf10.vercel.app']
