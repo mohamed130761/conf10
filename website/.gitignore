@@ -11,8 +11,7 @@ __pycache__/
 env/
 venv/
 
-# Django SQLite database (if used for development)
-db.sqlite3
+
 
 # Django migrations
 *.log

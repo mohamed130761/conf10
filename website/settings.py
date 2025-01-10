@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import environ
 import os
 from pathlib import Path
+import shutil
+import tempfile
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -96,7 +99,26 @@ DATABASES = {
     }
 }
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Use /tmp for deployment or a temp directory locally
+temp_dir = tempfile.gettempdir() if os.name != 'posix' else '/tmp'
+temp_db_path = os.path.join(temp_dir, 'db.sqlite3')
+
+# Path to the original database in the project
+original_db_path = os.path.join(BASE_DIR, 'db.sqlite3')
+
+# Copy database to temp location if needed
+if os.path.exists(original_db_path) and not os.path.exists(temp_db_path):
+    shutil.copy(original_db_path, temp_db_path)
+
+# Configure Django to use the writable database path
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': temp_db_path,
+    }
+}
 
 
 # Password validation
