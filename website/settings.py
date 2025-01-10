@@ -28,7 +28,7 @@ env = environ.Env(
 # Read .env file
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
-DEBUG = env('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = ['conf10.vercel.app',
 'conf10.netlify.app','localhost','127.0.0.1']
